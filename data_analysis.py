@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from fpdf import FPDF
 from pptx import Presentation
 from pptx.util import Inches
+import time
 
 # Leitura do arquivo Excel
 def read_excel(file_path):
@@ -66,6 +67,7 @@ def generate_slides(statistics, output_path):
 
 # Função principal
 def main():
+    start_time = time.time()  # Início da medição do tempo
     file_path = r'C:\Users\Ygor\Desktop\Shopping Barra.xlsx'
     try:
         df = read_excel(file_path)
@@ -94,6 +96,10 @@ def main():
         print(f"Erro: O arquivo {file_path} não foi encontrado.")
     except Exception as e:
         print(f"Erro ao processar o arquivo: {e}")
+    finally:
+        end_time = time.time()  # Fim da medição do tempo
+        execution_time = (end_time - start_time) * 1000  # Tempo de execução em milissegundos
+        print(f"Tempo de execução: {execution_time:.2f} ms")
 
 if __name__ == "__main__":
     main()
